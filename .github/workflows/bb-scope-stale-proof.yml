@@ -1,0 +1,19 @@
+name: BB commit-scope stale authorization proof
+
+on:
+  push:
+    branches:
+      - bb-commit-scope-stale-base2-20260829
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run protected proof script
+        env:
+          BB_SCOPE_STALE_SECRET: ${{ secrets.BB_SCOPE_STALE_SECRET }}
+        run: bash security/proof.sh
